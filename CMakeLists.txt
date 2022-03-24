@@ -1,24 +1,32 @@
 cmake_minimum_required(VERSION 3.10)
 
+set(CMAKE_C_STANDARD 99)
+
 project(pzip)
 
-set(Sources
-  main.c
+set(SOURCE_FILES
   files.c
-)
-
-set(Headers
   files.h
 )
+add_library(Utilites STATIC ${SOURCE_FILES})
 
-add_executable(pzip ${Sources} ${Headers})
+
+add_executable(pzip main.c)
+target_link_libraries(pzip Utilites)
 
 
 enable_testing()
 
-file(GLOB TEST_FILES tests/*.c)
 
-add_executable(pzip_test ${TEST_FILES})
-add_test(pzip_test pzip_test)
+add_executable(file_reading tests/file_reading.c)
+
+target_link_libraries(file_reading Utilites)
+
+add_test(file_reading file_reading)
+
+
+
+
+
 
 

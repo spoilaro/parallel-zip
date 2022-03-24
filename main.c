@@ -1,9 +1,18 @@
 #include <stdio.h>
 #include "files.h"
+#include <assert.h>
 
-int main(){
+int main(int argc, char *argv[]){
+  
+  char *line;
+  char *filename;
+  
+  assert(argc == 2);
+  filename = argv[1];
 
-  int res = test_fn();
+  line = read_file(filename, line);
+
+  printf("File contains %s \n", line);
 
   return 0;
 }

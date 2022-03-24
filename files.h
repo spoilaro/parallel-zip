@@ -1,2 +1,7 @@
+#ifndef FILESH
+#define FILESH
 
-int test_fn(void);
+char *read_file(char *, char *);
+
+
+#endif
