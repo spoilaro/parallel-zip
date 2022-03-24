@@ -4,15 +4,23 @@
 
 int main(int argc, char *argv[]){
   
-  char *line;
+  char *raw_line;
   char *filename;
+  char *compressed_line;
   
-  assert(argc == 2);
+  if (argc == 1){
+    fprintf(stderr, "No file specified\n");
+    return 1;
+  }
+
   filename = argv[1];
 
-  line = read_file(filename, line);
+  raw_line = read_file(filename, raw_line);
+  compressed_line = compress(raw_line);
+  
+  // TODO Write tests for compress
+  // TODO Free memory
 
-  printf("File contains %s \n", line);
 
   return 0;
 }
