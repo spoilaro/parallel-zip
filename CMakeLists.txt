@@ -7,6 +7,8 @@ project(pzip)
 set(SOURCE_FILES
   files.c
   files.h
+  compressor.c
+  compressor.h
 )
 add_library(Utilites STATIC ${SOURCE_FILES})
 
