@@ -3,6 +3,7 @@
 #include <assert.h>
 #include "compressor.h"
 #include <pthread.h>
+#include <stdlib.h>
 
 void * thread_runner(void * file_name) {
   char *input_name = (char *) file_name;
@@ -13,35 +14,32 @@ void * thread_runner(void * file_name) {
   Compressor__compress(c);
   Compressor__printer(c);
 
+  free(c);
+
   return 0;
 }
 
 int main(int argc, char *argv[]){
-  
-  char *filename;
-  char *filename2 = "../input2.txt";
+  pthread_t *threads;
+  int number_of_threads = argc - 1;
 
-  printf("Args are %s \n", argv[1]);
-  printf("Args are %s \n", argv[2]);
-
-  // Threads
-  pthread_t tid0;
-  pthread_t tid1;
+  threads = malloc(sizeof(pthread_t) * number_of_threads);
 
   if (argc == 1){
     fprintf(stderr, "No file specified\n");
     return 1;
   }
 
-  filename = argv[1];
-
-  pthread_create(&tid0, NULL, thread_runner, (void *)filename);
-  pthread_create(&tid1, NULL, thread_runner, (void *)filename2);
+  for (int i=0; i<number_of_threads; i++){
+      pthread_create(&threads[i], NULL, thread_runner, (void *)argv[i+1]);
+  }
   
   // TODO Write tests for compress
   // TODO Free memory
   
   pthread_exit(NULL);
+
+  free(threads);
 
   return 0;
 }

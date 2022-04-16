@@ -1,3 +1,4 @@
+#define MAX_THREADS 4
 
 typedef struct {
   char *raw_line;
