@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include "files.h"
 #include <assert.h>
 #include "compressor.h"
 #include <pthread.h>

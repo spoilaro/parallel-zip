@@ -14,4 +14,3 @@ void Compressor__compress(Compressor *self);
 
 void Compressor__printer(Compressor *self);
 
-

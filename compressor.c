@@ -74,3 +74,4 @@ void Compressor__printer(Compressor *self) {
   printf("Raw line is %s \n", self->raw_line);
   printf("Compressed line is %s \n", self->compressed_line);
 }
+

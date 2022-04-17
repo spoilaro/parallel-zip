@@ -5,8 +5,6 @@ set(CMAKE_C_STANDARD 99)
 project(pzip)
 
 set(SOURCE_FILES
-  files.c
-  files.h
   compressor.c
   compressor.h
 )
@@ -17,14 +15,14 @@ add_executable(pzip main.c)
 target_link_libraries(pzip Utilites)
 
 
-enable_testing()
-
-
-add_executable(file_reading tests/file_reading.c)
-
-target_link_libraries(file_reading Utilites)
-
-add_test(file_reading file_reading)
+#enable_testing()
+#
+#
+#add_executable(file_reading tests/file_reading.c)
+#
+#target_link_libraries(file_reading Utilites)
+#
+#add_test(file_reading file_reading)
 
 
 
