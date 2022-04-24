@@ -2,11 +2,11 @@
 #include <fcntl.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <sys/mman.h>
 #include <sys/stat.h>
-#include <string.h>
 
-Compressor *Compressor__init(char *file_name){
+Compressor *Compressor__init(char *file_name) {
   Compressor *c = malloc(sizeof(Compressor));
 
   c->raw_line = NULL;
@@ -44,24 +44,27 @@ void Compressor__compress(Compressor *self) {
 
   int rlen;
   int length = strlen(self->raw_line);
-  char *compressed_line = malloc(sizeof(char) * (length * 2 +1));
+  char *compressed_line = malloc(sizeof(char) * (length * 2 + 1));
   char count[50];
 
   int i, j = 0, k;
 
-  for (i = 0; i<length; i++){
+  for (i = 0; i < length; i++) {
     compressed_line[j++] = self->raw_line[i];
 
     rlen = 1;
-    while (i+1 < length && self->raw_line[i] == self->raw_line[i+1]){
+    while (i + 1 < length && self->raw_line[i] == self->raw_line[i + 1]) {
       rlen++;
       i++;
     }
 
-    sprintf(count, "%d", rlen);
+    if (rlen != 1) {
 
-    for (k=0; *(count + k); k++, j++){
-      compressed_line[j] = count[k];
+      sprintf(count, "%d", rlen);
+
+      for (k = 0; *(count + k); k++, j++) {
+        compressed_line[j] = count[k];
+      }
     }
   }
 
@@ -71,7 +74,5 @@ void Compressor__compress(Compressor *self) {
 }
 
 void Compressor__printer(Compressor *self) {
-  printf("Raw line is %s \n", self->raw_line);
-  printf("Compressed line is %s \n", self->compressed_line);
+  printf("%s", self->compressed_line);
 }
-
