@@ -3,6 +3,7 @@
 #include "compressor.h"
 #include <pthread.h>
 #include <stdlib.h>
+#include <sys/sysinfo.h>
 
 void * thread_runner(void * file_name) {
   char *input_name = (char *) file_name;
@@ -21,6 +22,13 @@ void * thread_runner(void * file_name) {
 int main(int argc, char *argv[]){
   pthread_t *threads;
   int number_of_threads = argc - 1;
+  int processor_count;
+
+  processor_count = get_nprocs();
+
+  if (number_of_threads > processor_count){
+    number_of_threads = processor_count;
+  }
 
   threads = malloc(sizeof(pthread_t) * number_of_threads);
 
