@@ -13,6 +13,7 @@ add_library(Utilites STATIC ${SOURCE_FILES})
 
 add_executable(pzip main.c)
 target_link_libraries(pzip Utilites)
+target_link_libraries(pzip pthread)
 
 
 #enable_testing()
