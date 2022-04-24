@@ -7,10 +7,10 @@ compressing multiple files.
 
 ## Instructions
 ```
-mkdir build // Creates a build directory
-cd build
-cmake ..
-make
-pzip <file> <file> ... 
+$ mkdir build   // Creates a build directory
+$ cd build
+$ cmake ..      // Generates a Makefile
+$ make          // Does the actual building
+$ pzip <file> <file> ... 
 ```
 
